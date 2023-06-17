@@ -9,3 +9,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// event management app model
+model Event {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  location    String
+  date        DateTime
+  image       String?
+  time        String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  organizerId String
+  attendees   Attendee[]
+  category    Category   @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  comments    Comment[]
+}
+
+model Attendee {
+  id         String     @id @default(uuid())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  userId     String
+  event      Event      @relation(fields: [eventId], references: [id])
+  eventId    String
+  rsvpStatus RsvpStatus @default(NOT_GOING)
+}
+
+enum RsvpStatus {
+  GOING
+  NOT_GOING
+  MAYBE
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  events    Event[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   String
+}
