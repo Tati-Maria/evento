@@ -1,9 +1,10 @@
+import Hero from "@/components/sections/hero"
 import { UserButton, SignOutButton } from "@clerk/nextjs"
 
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <section>
+      <Hero />
+    </section>
   )
 }

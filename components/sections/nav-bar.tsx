@@ -2,15 +2,20 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { SignInButton, useUser, UserButton } from "@clerk/nextjs";
+import { useUser,SignIn, SignInButton } from "@clerk/nextjs";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const user = useUser();
 
+  useEffect(() => {
+    <SignIn path="/sign-in" />;
+  }, []);
+
   return (
     <nav className="flex items-center justify-between py-4 border-b">
       <Link href="/">
-        <Image src="/mood.svg" alt="Mood Logo" width={50} height={100} />
+        <Image src="/mood.svg" alt="Mood Logo" width={40} height={50} />
       </Link>
       <ul className="flex space-x-10">
         <li>
@@ -20,20 +25,15 @@ const Navbar = () => {
           <Link href="/about">About</Link>
         </li>
       </ul>
-      <div>
-        {user.isSignedIn ? (
+        {!!user ? (
           <div className="flex items-center gap-6">
             <Link href="/dashboard">Dashboard</Link>
-            <UserButton 
-            afterSignOutUrl="/"
-            />
           </div>
         ) : (
           <>
-            <SignInButton />
+            <SignIn path="/sign-in" />
           </>
         )}
-      </div>
     </nav>
   );
 };

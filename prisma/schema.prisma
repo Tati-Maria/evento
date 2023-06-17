@@ -21,10 +21,9 @@ model Event {
   time        String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+  category    String
   organizerId String
   attendees   Attendee[]
-  category    Category   @relation(fields: [categoryId], references: [id])
-  categoryId  String
   comments    Comment[]
 }
 
@@ -44,14 +43,6 @@ enum RsvpStatus {
   MAYBE
 }
 
-model Category {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  events    Event[]
-}
-
 model Comment {
   id        String   @id @default(uuid())
   text      String
@@ -61,3 +52,4 @@ model Comment {
   event     Event    @relation(fields: [eventId], references: [id])
   eventId   String
 }
+

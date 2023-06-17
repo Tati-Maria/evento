@@ -4,6 +4,7 @@ import { ClerkProvider} from "@clerk/nextjs";
 import { Fira_Sans } from "next/font/google";
 import Navbar from "@/components/sections/nav-bar";
 import Container from "@/components/sections/container";
+import Provider from "@/providers/provider";
 
 const firasans = Fira_Sans({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -41,13 +42,21 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={firasans.className}>
+        <body className={`${firasans.className} bg-gray-50 `}>
+          <Provider />
           <Container>
             <header>
               <Navbar  />
             </header>
             <main className="min-h-screen">{children}</main>
-            <footer></footer>
+            <footer>
+              <div className="flex items-center justify-center py-4 border-t">
+                <p className="text-gray-500">
+                  Made with ❤️ by{" "}
+                  Maria
+                </p>
+              </div>
+            </footer>
           </Container>
         </body>
       </html>
