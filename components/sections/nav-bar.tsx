@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useUser,SignIn, SignInButton } from "@clerk/nextjs";
+import { useUser,SignIn, SignInButton, UserButton } from "@clerk/nextjs";
 import { useEffect } from "react";
 
 const Navbar = () => {
@@ -28,6 +28,9 @@ const Navbar = () => {
         {!!user ? (
           <div className="flex items-center gap-6">
             <Link href="/dashboard">Dashboard</Link>
+            <UserButton
+            afterSignOutUrl="/sign-in" 
+            />
           </div>
         ) : (
           <>

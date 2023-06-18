@@ -188,7 +188,11 @@ const EventForm = () => {
                   <SelectItem value="hackathon">Hackathon</SelectItem>
                   <SelectItem value="social">Social</SelectItem>
                   <SelectItem value="party">Party</SelectItem>
-                  <SelectItem value="gathering">Gathering</SelectItem>
+                  <SelectItem value="gaming">Gaming</SelectItem>
+                  <SelectItem value="sport">Sport</SelectItem>
+                  <SelectItem value="food">Food</SelectItem>
+                  <SelectItem value="travel">Travel</SelectItem>
+                  <SelectItem value="entertainment">Entertainment</SelectItem>
                   <SelectItem value="festival">Festival</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
@@ -205,7 +209,7 @@ const EventForm = () => {
             <FormItem>
               <FormLabel>Time</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="E.g 19:00" type="time" />
+                <Input {...field} placeholder="E.g 19:00" type="text" />
               </FormControl>
               <FormDescription>Enter the time of your event.</FormDescription>
               <FormMessage />
