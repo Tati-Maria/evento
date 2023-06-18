@@ -22,7 +22,7 @@ const EmptyState = ({
 
     return (
         <div
-        className="h-[calc(100vh - 4rem)] flex flex-col justify-center items-center gap-4"
+        className="h-screen flex flex-col justify-center items-center gap-4"
         >
             <Heading
             title={title}
@@ -31,7 +31,7 @@ const EmptyState = ({
             />
             {showReset && (
                 <div
-                className="w-48 mt-4"
+                className="flex justify-center w-full"
                 >
                     <Button
                     onClick={handleReset}

@@ -82,6 +82,7 @@ const Categories: React.FC = () => {
 
     return (
         <ul
+        id="categories"
         className="pt-4 flex items-center justify-between overflow-x-auto"
         >
             {categories.map((category, index) => (

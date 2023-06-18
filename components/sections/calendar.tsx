@@ -9,7 +9,7 @@ interface Props {
 const CalendarSection = ({date}: Props) => {
     return (
         <section
-        className="hidden md:block md:w-1/4 "
+        className="hidden lg:block lg:w-1/4 "
         >
             <Calendar
             mode="single"

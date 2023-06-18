@@ -2,24 +2,24 @@ import { Metadata } from "next";
 import ClientOnly from "@/components/sections/client-only";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Fira_Sans, Poppins } from "next/font/google";
-import Navbar from "@/components/sections/nav-bar";
+import { Inter } from "next/font/google";
+import Navbar from "@/components/nav/navbar";
 import Container from "@/components/sections/container";
 import Provider from "@/providers/provider";
 import Categories from "@/components/sections/categories";
 
-const poppins = Poppins({
+const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin-ext"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Mood - Find events near you",
-    template: "%s | Mood - Find events near you",
+    default: "Evento - Find events near you",
+    template: "%s | Evento - Find events near you",
   },
   description:
-    "Mood is an event management platform that allows you to create, discover and share events near you.",
+    "Evento is an event management platform that allows you to create, discover and share events near you.",
   category: "Social",
   keywords: [
     "events",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "mood",
   ],
   colorScheme: "light",
-  creator: "Mood",
+  creator: "Maria",
 };
 
 export default async function RootLayout({
@@ -42,22 +42,19 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${poppins.className} bg-gray-50 `}>
+        <body className={`${inter.className} bg-white flex`}>
+          <ClientOnly>
           <Provider />
-          <Container>
-            <ClientOnly>
-              <header>
-                <Navbar />
-                <Categories />
-              </header>
-            </ClientOnly>
-            <main className="min-h-screen">{children}</main>
-            <footer>
-              <div className="flex items-center justify-center py-4 border-t">
-                <p className="text-gray-500">Made with ❤️ by Maria</p>
-              </div>
-            </footer>
-          </Container>
+            <header
+            className="flex flex-col h-screen overflow-y-auto w-52"
+            >
+              <Navbar />
+              <Categories />
+            </header>
+          </ClientOnly>
+            <main className="flex flex-col flex-grow w-full overflow-y-auto h-screen">
+              {children}
+            </main>
         </body>
       </html>
     </ClerkProvider>
