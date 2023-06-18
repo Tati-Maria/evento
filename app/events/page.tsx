@@ -1,11 +1,8 @@
-import Link from "next/link";
 import ClientOnly from "@/components/sections/client-only";
 import EmptyState from "@/components/sections/empty-state";
 import { EventParams, getEvents } from "@/actions/getEvents";
 import Heading from "@/components/ui/heading";
 import Categories from "@/components/sections/categories";
-import { Calendar } from "@/components/ui/calendar";
-import CalendarSection from "@/components/sections/calendar";
 import EventList from "@/components/sections/event-list";
 
 interface Props {
@@ -26,12 +23,15 @@ const EventsPage = async ({searchParams}: Props) => {
 
   return (
     <section
-    className="my-10"
+    className="my-10 mx-4 md:mx-8"
     >
       <Heading 
       title="Events"
       subText="Find events from all over the world. You can also create your own events and share them with your friends."
       />
+      <ClientOnly>
+        <Categories />
+      </ClientOnly>
       <EventList events={events} />
     </section>
   )

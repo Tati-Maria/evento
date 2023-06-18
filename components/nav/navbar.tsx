@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Switch } from "../ui/switch";
+import { useTheme } from "next-themes";
 import { FaTimes } from "react-icons/fa";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 import { LuCalendarDays, LuLayoutDashboard } from "react-icons/lu";
@@ -15,6 +16,9 @@ import { Button } from "../ui/button";
 
 const Navbar = () => {
   const user = useUser();
+  const { resolvedTheme, setTheme, theme} = useTheme();
+
+
 
   return (
     <nav className="flex flex-col items-center justify-between w-full h-full p-4 bg-white border-r border-gray-200">
@@ -45,7 +49,10 @@ const Navbar = () => {
         )}
         {/* Toggle Theme */}
         <div className="flex items-center space-x-2">
-          <Switch id="airplane-mode" />
+          <Switch 
+          id="toggle"
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          />
         </div>
       </div>
     </nav>

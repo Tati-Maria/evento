@@ -1,7 +1,7 @@
 import { SafeEvent } from "@/types"
 import CalendarSection from "./calendar";
 import {format} from "date-fns"
-import EventCard from "../ui/event-card";
+import EventCard from "@/components/event/event-card";
 
 type Props = {
     events: SafeEvent[] | undefined;
@@ -19,30 +19,26 @@ const EventList: React.FC<Props> = ({
 
   return (
     <div 
-    className="relative flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 w-full"
+    className="relative flex flex-col"
     >
         {/* Events */}
         <div
-        className="grid grid-cols-fluid-1 gap-4 flex-grow"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xl:grid-cols-4 "
         >
             {events?.map((event) => (
-                <EventCard
+                <EventCard 
                 key={event.id}
-                title={event.title}
-                date={format(new Date(event.date), "MMM dd, yyyy")}
                 id={event.id}
-                attendees={event.attendees}
-                location={event.location}
-                time={event.time}
+                title={event.title}
                 image={event.image}
+                date={format(new Date(event.date), "MMMM dd, yyyy")}
+                time={event.time}
+                location={event.location}
                 category={event.category}
+                attendees={event.attendees}
                 />
             ))}
         </div>
-        {/* Calendar */}
-        <CalendarSection
-        date={eventDates?.[0].toString() || new Date().toString()}
-        />
     </div>
   )
 }
