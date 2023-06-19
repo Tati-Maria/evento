@@ -1,6 +1,7 @@
 "use client";
 import { CldUploadButton } from "next-cloudinary";
 import { useCallback } from "react";
+import {FcOk} from "react-icons/fc";
 import { TbPhotoPlus } from "react-icons/tb";
 import Image from "next/image";
 
@@ -30,7 +31,9 @@ const ImageUploader = ({
 
   return (
     <div
-    className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-md p-4"
+    className={`flex flex-col items-center justify-center border-2 border-dashed rounded-md p-4 ${
+      value ? "border-green-500" : "border-gray-500"
+    }`}
     >
       <label htmlFor={htmlFor} className="text-sm text-gray-500 font-medium">
         {label}
@@ -51,7 +54,7 @@ const ImageUploader = ({
           }`}
         >
           {value ? (
-            <Image src={value} alt="Uploaded Image" width={32} height={32} />
+            <FcOk size={32} />
           ) : (
             <TbPhotoPlus size={32} />
           )}

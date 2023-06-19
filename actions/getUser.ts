@@ -1,6 +1,6 @@
 import {clerkClient} from "@clerk/nextjs";
 
-export async function getUser(userId: string) {
+export async function getUser(userId: string ) {
     const user = await clerkClient.users.getUser(userId);
     return user;
 }

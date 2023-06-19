@@ -7,7 +7,7 @@ type EventProps = {
 const EventHeader: React.FC<EventProps> = ({image}) => {
   return (
     <div
-    className="relative h-64"
+    className="relative"
     >
         <Image
         className="object-cover object-center w-full h-full" 

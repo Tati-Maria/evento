@@ -1,59 +1,131 @@
 "use client";
-import Link from "next/link";
+import { AiOutlineLogout, AiOutlineLogin } from "react-icons/ai";
 import { Switch } from "../ui/switch";
 import { useTheme } from "next-themes";
-import { FaTimes } from "react-icons/fa";
-import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
-import { LuCalendarDays, LuLayoutDashboard } from "react-icons/lu";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { LuLayoutDashboard } from "react-icons/lu";
 import {
   IoAnalyticsOutline,
   IoCalendarOutline,
   IoSettingsOutline,
 } from "react-icons/io5";
 import MenuItem from "../ui/menu-item";
-import { FcVip } from "react-icons/fc";
-import { Button } from "../ui/button";
 
 const Navbar = () => {
-  const user = useUser();
-  const { resolvedTheme, setTheme, theme} = useTheme();
-
-
+  const { setTheme, theme } = useTheme();
 
   return (
-    <nav className="flex flex-col items-center justify-between w-full h-full p-4 bg-white border-r border-gray-200">
-      <div className="flex flex-col items-center justify-center w-full relative border-b">
-        <Link
-        className="flex items-center justify-center w-full h-14 text-2xl font-bold text-gray-700" 
-        href="/">
-          <FcVip className="w-6 h-6 mr-2" />
-          Evento
-        </Link>
-      </div>
-      <ul className="flex flex-col items-center justify-center w-full">
-        <MenuItem title="Dashboard" icon={LuLayoutDashboard} href="/dashboard" />
-        <MenuItem title="Events" icon={LuCalendarDays} href="/events" />
-        <MenuItem title="Calendar" icon={IoCalendarOutline} href="/calendar" />
-        <MenuItem title="Analytics" icon={IoAnalyticsOutline} href="/analytics" />
-        <MenuItem title="Settings" icon={IoSettingsOutline} href="/settings" />
-      </ul>
-      <div
-      className="border-t w-full pt-2 px-2 flex items-center justify-between" 
-      >
-        {user ? (
-          <UserButton
-          afterSignOutUrl="/" 
-          />
-        ) : (
-          <SignInButton />
-        )}
-        {/* Toggle Theme */}
-        <div className="flex items-center space-x-2">
-          <Switch 
-          id="toggle"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          />
+    <nav className="drawer border-b z-50">
+      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col">
+        {/* Navbar */}
+        <div className="w-full navbar bg-base-300">
+          <div className="flex-none lg:hidden">
+            <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline-block w-6 h-6 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </label>
+          </div>
+          <div className="flex-1 px-2 mx-2 font-bold text-2xl">Evento</div>
+          <div className="flex-none  lg:hidden">
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
+          <div className="flex-none hidden lg:block">
+            <ul className="menu menu-horizontal space-x-10">
+              {/* Navbar menu content here */}
+              <MenuItem
+                className="hover:font-bold"
+                title="Dashboard"
+                href="/dashboard"
+              />
+              <MenuItem title="Events" href="/events" />
+              <MenuItem title="Analytics" href="/analytics" />
+              <MenuItem title="Settings" href="/settings" />
+              <div className="flex items-center space-x-6">
+                <Switch
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                />
+                <SignedIn>
+                  <SignOutButton>
+                    <span className="text-red-500">Log Out</span>
+                  </SignOutButton>
+                </SignedIn>
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
+              </div>
+            </ul>
+          </div>
         </div>
+        {/* End Navbar */}
+      </div>
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-80 h-full bg-white pt-10">
+          {/* Sidebar content here */}
+          <MenuItem
+            title="Dashboard"
+            href="/dashboard"
+            icon={LuLayoutDashboard}
+            className="hover:bg-gray-100 rounded-md h-12"
+          />
+          <MenuItem
+            className="hover:bg-gray-100 rounded-md h-12"
+            title="Events"
+            href="/events"
+            icon={IoCalendarOutline}
+          />
+          <MenuItem
+            title="Analytics"
+            href="/analytics"
+            icon={IoAnalyticsOutline}
+            className="hover:bg-gray-100 rounded-md h-12"
+          />
+          <MenuItem
+            title="Settings"
+            href="/settings"
+            icon={IoSettingsOutline}
+            className="hover:bg-gray-100 rounded-md h-12"
+          />
+          <div className="hover:bg-gray-100 rounded-md h-12 p-4">
+            <div className="flex items-center space-x-4">
+              <SignedIn>
+                <span>
+                  <AiOutlineLogout className="w-6 h-6" />
+                </span>
+                <SignOutButton />
+              </SignedIn>
+            </div>
+            <div className="flex items-center space-x-4">
+              <SignedOut>
+                <span>
+                  <AiOutlineLogin className="w-6 h-6" />
+                </span>
+                <SignInButton />
+              </SignedOut>
+            </div>
+          </div>
+        </ul>
       </div>
     </nav>
   );

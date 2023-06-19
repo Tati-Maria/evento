@@ -1,6 +1,6 @@
 
 
-const Dashboard = () => {
+const Dashboard = async () => {
   return (
     <section
     aria-label='Dashboard Page'

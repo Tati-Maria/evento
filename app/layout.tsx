@@ -1,15 +1,16 @@
 import { Metadata } from "next";
 import ClientOnly from "@/components/sections/client-only";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { Inter, Lato, Montserrat } from "next/font/google";
+import {
+  ClerkProvider,
+} from "@clerk/nextjs";
+import { Montserrat, Outfit } from "next/font/google";
 import Navbar from "@/components/nav/navbar";
 import Provider from "@/providers/provider";
-import Search from "@/components/ui/search";
-import Link from "next/link";
+import Categories from "@/components/sections/categories";
 
-const inter = Montserrat({
-  weight: ["300", "400", "700"],
+const inter = Outfit({
+  weight: ["300", "400","500", "700"],
   subsets: ["latin-ext"],
 });
 
@@ -39,30 +40,34 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
-    <ClerkProvider>
+    <ClerkProvider
+    appearance={{
+      variables: {
+        colorPrimary: "#6610F2",
+        colorText: "#000000",
+        colorSuccess: "#56E39F",
+        colorDanger: "#E74C3C",
+        colorWarning: "#F1C40F",
+      },
+      elements: {
+        button: {
+            backgroundColor: "#6610F2",
+        },
+      }
+    }}
+    >
       <html lang="en">
-        <body
-          className={`${inter.className} bg-white flex dark:bg-gray-950 dark:text-white`}
-        >
+        <body className={`${inter.className} bg-white`}>
           <Provider>
             <ClientOnly>
-              <header className="flex flex-col h-screen overflow-y-auto w-52">
+              <header>
                 <Navbar />
+                <Categories />
               </header>
             </ClientOnly>
-            <main className="flex flex-col flex-grow w-full overflow-y-auto h-screen">
-              <div className="flex items-center justify-between w-full border-b border-gray-200 p-4">
-                <Search />
-                <Link
-                  className="bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 text-white font-semibold py-2 px-4 rounded hover:shadow-lg transition duration-300 ease-in-out"
-                  href="/events/new"
-                >
-                  Create Event
-                </Link>
-              </div>
-              {children}
-            </main>
+            <main className="min-h-screen">{children}</main>
           </Provider>
         </body>
       </html>

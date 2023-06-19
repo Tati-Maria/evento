@@ -6,7 +6,7 @@ const publicPaths = [
     "/sign-in",
     "/sign-up",
     "/events",
-    "/events/[id]",
+    "/events/:id",
     "/about"
 ];
 

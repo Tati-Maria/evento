@@ -56,7 +56,7 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, title, className, selected 
     hover:border-gray-800
     transition
     cursor-pointer
-    ${selected ? "border-gray-800 text-gray-800" : "border-transparent text-neutral-500"}
+    ${selected ? "border-blue-500 text-blue-500" : "border-transparent text-neutral-500"}
     `, className)}
     >
       <Icon className="text-2xl" />

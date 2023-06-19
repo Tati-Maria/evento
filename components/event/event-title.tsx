@@ -14,7 +14,7 @@ const EventTitle: React.FC<EventTitleProps> = ({
     time
 }) => {
   return (
-    <article className="flex justify-between py-6">
+    <article className="flex flex-col space-y-2 py-6">
         <div className="flex flex-col space-y-4">
             <span className="text-rose-500 text-sm">
                 {format(new Date(date), "MMMM dd, yyyy")} | {time}
@@ -24,7 +24,7 @@ const EventTitle: React.FC<EventTitleProps> = ({
             className="text-xl font-bold"
             />
         </div>
-        <div className="flex flex-col space-y-2 text-gray-500">
+        <div className="flex flex-col space-y-4 text-gray-500">
             <div className="flex items-center space-x-2 ">
                 <span className="font-bold text-sm">Share</span>
                 <div className="flex items-center space-x-2">
@@ -34,7 +34,7 @@ const EventTitle: React.FC<EventTitleProps> = ({
                     <BsWechat />
                 </div>
             </div>
-            <span className="border border-gray-300 px-2 py-1">
+            <span className="border border-gray-300 px-2 py-1 inline-block w-max">
                 <span className="font-bold text-sm">Add to Calendar</span>
             </span>
         </div>
