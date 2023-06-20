@@ -3,7 +3,10 @@ import EventForm from "@/components/sections/event-form"
 import TextView from "@/components/ui/textview"
 import Title from "@/components/ui/title"
 
-
+export const metadata = {
+  title: "New Event",
+  description: "Create a new event",
+}
 
 const NewEvent = () => {
    

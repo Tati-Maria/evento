@@ -12,11 +12,31 @@ import FlexBetween from "@/components/sections/flex-between";
 import EventComment from "@/components/event/event-comment";
 import AddComent from "@/components/event/add-comment";
 
-const revalidate = 1;
+export const revalidate = 1;
 
 interface EventDetailProps {
   eventId: string;
 }
+
+export async function generateMetadata({ params }: { params: EventDetailProps }) {
+  try {
+    const event = await getEvent(params);
+    if(!event) return {
+      title: "Event not found",
+      description: "Event not found"
+    }
+    return {
+      title: `${event.title} | Event Detail`,
+      description: event.description,
+    }
+  } catch (error) {
+    return {
+      title: "Event not found",
+      description: "Event not found"
+    }
+  }
+}
+
 
 const EventDetail = async ({ params }: { params: EventDetailProps }) => {
   const event = await getEvent(params);

@@ -80,18 +80,18 @@
   }
 }
 
-ul#categories::-webkit-scrollbar {
+::-webkit-scrollbar {
   height: 0.5rem;
   width: 0.5rem;
 }
 
-ul#categories::-webkit-scrollbar-track {
-  background: #8A90A5;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
   border-radius: 1rem;
 }
 
-ul#categories::-webkit-scrollbar-thumb {
-  background: #434B7B;
+::-webkit-scrollbar-thumb {
+  background: pink;
   border-radius: 1rem;
 }
 

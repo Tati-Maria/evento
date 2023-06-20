@@ -148,80 +148,15 @@ const EventForm = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="location"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Location</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="E.g London, UK" type="text" />
-              </FormControl>
-              <FormDescription>
-                Provide a complete address for your event.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Category Picker */}
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Category</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value as string}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a category that matches your event" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="conference">Conference</SelectItem>
-                  <SelectItem value="seminar">Seminar</SelectItem>
-                  <SelectItem value="meetup">Meetup</SelectItem>
-                  <SelectItem value="workshop">Workshop</SelectItem>
-                  <SelectItem value="hackathon">Hackathon</SelectItem>
-                  <SelectItem value="social">Social</SelectItem>
-                  <SelectItem value="party">Party</SelectItem>
-                  <SelectItem value="gaming">Gaming</SelectItem>
-                  <SelectItem value="sport">Sport</SelectItem>
-                  <SelectItem value="food">Food</SelectItem>
-                  <SelectItem value="travel">Travel</SelectItem>
-                  <SelectItem value="entertainment">Entertainment</SelectItem>
-                  <SelectItem value="festival">Festival</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Time Picker */}
-        <FormField
-          control={form.control}
-          name="time"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Time</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="E.g 19:00" type="text" />
-              </FormControl>
-              <FormDescription>Enter the time of your event.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Date Picker */}
+        <div
+        className="flex flex-col gap-4 lg:flex-row md:gap-8 w-full"
+        >
+          {/* Date Picker */}
         <FormField
           control={form.control}
           name="date"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="">
               <FormLabel>Date</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
@@ -229,7 +164,7 @@ const EventForm = () => {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-full pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -258,10 +193,90 @@ const EventForm = () => {
             </FormItem>
           )}
         />
+        {/* Location Picker */}
+        <FormField
+          control={form.control}
+          name="location"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Location</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="E.g London, UK" type="text" />
+              </FormControl>
+              <FormDescription>
+                Provide a complete address for your event.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {/* Time Picker */}
+        <FormField
+          control={form.control}
+          name="time"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Time</FormLabel>
+              <FormControl>
+                <Input {...field} 
+                placeholder="E.g 10:00 AM - 12:00 PM" 
+                type="text" />
+              </FormControl>
+              <FormDescription>Enter the time of your event.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        {/* Category Picker */}
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem
+            className="w-full lg:w-[450px]"
+            >
+              <FormLabel>Category</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                
+              >
+                <FormControl
+                >
+                  <SelectTrigger>
+                    <SelectValue className="text-gray-950" placeholder="Select a category that matches your event" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent
+                className="overflow-y-scroll max-h-60"
+                >
+                  <SelectItem value="conference">Conference</SelectItem>
+                  <SelectItem value="seminar">Seminar</SelectItem>
+                  <SelectItem value="meetup">Meetup</SelectItem>
+                  <SelectItem value="workshop">Workshop</SelectItem>
+                  <SelectItem value="hackathon">Hackathon</SelectItem>
+                  <SelectItem value="social">Social</SelectItem>
+                  <SelectItem value="party">Party</SelectItem>
+                  <SelectItem value="gaming">Gaming</SelectItem>
+                  <SelectItem value="sport">Sport</SelectItem>
+                  <SelectItem value="food">Food</SelectItem>
+                  <SelectItem value="travel">Travel</SelectItem>
+                  <SelectItem value="entertainment">Entertainment</SelectItem>
+                  <SelectItem value="festival">Festival</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        </div>
+        
         {/* Image Uploader */}
         <ImageUploader
           htmlFor="image"
-          value={form.getValues("image")}
+          value={form.watch("image")}
           onUpload={url => form.setValue("image", url)}
           label="Event Image"
         />
@@ -271,7 +286,7 @@ const EventForm = () => {
           className="text-gray-500 hover:text-gray-600 underline" 
           href="/events">Cancel</Link>
           <Button 
-          className="bg-purple-600 hover:bg-purple-700 text-white" 
+          className="btn-special" 
           type="submit"
             disabled={form.formState.isSubmitting}
           >

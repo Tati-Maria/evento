@@ -3,6 +3,13 @@ import EmptyState from "@/components/sections/empty-state";
 import { EventParams, getEvents } from "@/actions/getEvents";
 import EventList from "@/components/sections/event-list";
 
+export const metadata = {
+  title: "Events",
+  description: "Find events to attend",
+}
+
+export const revalidate = 1;
+
 interface Props {
   searchParams: EventParams;
 }

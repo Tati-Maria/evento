@@ -23,9 +23,9 @@ const Event = ({
 }: EventProps) => {
   return (
     <li
-    className='bg-white shadow-sm rounded-md p-4 flex justify-between items-center'
+    className='bg-white shadow-sm rounded-md p-4 flex flex-col sm:flex-row justify-center items-center sm:justify-between'
     >
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-4 flex-col text-center sm:text-start sm:flex-row'>
             <Image 
             alt={title}
             src={image || '/images/event-default.png'}
@@ -55,7 +55,8 @@ const Event = ({
             <DeleteEvent eventId={id} />
             <Link 
             className='text-green-500 hover:text-green-600'
-            href={`/events/edit/${id}`}>
+            href={`/events/edit/${id}`}
+            >
                 <CiEdit size={25}/>
             </Link>
         </div>

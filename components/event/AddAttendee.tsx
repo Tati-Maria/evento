@@ -1,5 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
 import { useCallback } from "react";
@@ -30,17 +31,20 @@ export default function AddAttendee({ eventId }: AddAttendeeProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+  const router = useRouter();
 
   const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
     try {
-      const response = await axios.post(`/api/events/${eventId}/attendee`, data);
+      await axios.post(`/api/events/${eventId}/attendee`, data);
       toast.success("You have successfully registered for this event.", {
         icon: "🎉",
       });
+      router.refresh();
+      form.reset();
     } catch (error: any) {
       toast.error("You are already registered for this event.");
     }
-  } , [eventId]);
+  } , [eventId, router, form]);
 
 
   return (

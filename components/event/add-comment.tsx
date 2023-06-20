@@ -1,5 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
 import { useCallback } from "react";
@@ -35,6 +36,7 @@ const AddComent = ({ eventId }: AddCommentProps) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
   });
+  const router = useRouter();
 
     const onSubmit = useCallback(async (data: FormValues) => {
         if(!data || !eventId) return;
@@ -44,13 +46,15 @@ const AddComent = ({ eventId }: AddCommentProps) => {
             toast.success("Your comment has been added", {
                 icon: "👏",
             });
+            router.refresh();
+            form.reset();
         } catch (error) {
             toast.error("Something went wrong", {
                 icon: "😢",
             });
         }
 
-    }, [eventId]);
+    }, [eventId, router, form]);
 
   return (
     <Form
@@ -70,7 +74,7 @@ const AddComent = ({ eventId }: AddCommentProps) => {
                         <Textarea
                         placeholder="How was the event?" 
                         {...field}
-                        className="resize-none"
+                        className="resize-none bg-slate-100"
                         />
                     </FormControl>
                     <FormDescription>
