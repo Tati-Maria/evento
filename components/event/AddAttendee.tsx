@@ -34,9 +34,9 @@ export default function AddAttendee({ eventId }: AddAttendeeProps) {
   const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
     try {
       const response = await axios.post(`/api/events/${eventId}/attendee`, data);
-      if(response.data.attendee.rsvpStatus === "GOING") toast.success("We are looking forward to seeing you there!");
-      else if(response.data.attendee.rsvpStatus === "MAYBE") toast.success("We hope you can make it!");
-      else if(response.data.attendee.rsvpStatus === "NOT_GOING") toast.success("We hope to see you at the next event!");
+      toast.success("You have successfully registered for this event.", {
+        icon: "🎉",
+      });
     } catch (error: any) {
       toast.error("You are already registered for this event.");
     }

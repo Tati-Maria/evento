@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import {auth} from "@clerk/nextjs";
-import {RiDeleteBin6Line} from "react-icons/ri";
+import { GoTrashcan } from "react-icons/go";
 import { Button } from "../ui/button";
 
 
@@ -35,9 +35,10 @@ const DeleteEvent = ({ eventId }: DeleteEventProps) => {
             <Button
             type="submit"
             title="Delete Event"
-            className="text-red-500 hover:bg-red-500 hover:text-white"
+            variant={"ghost"}
+            className="text-red-500 hover:text-red-600"
             >
-                <RiDeleteBin6Line />
+                <GoTrashcan size={20} />
             </Button>
         </form>
     )

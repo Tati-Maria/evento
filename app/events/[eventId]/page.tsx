@@ -1,17 +1,18 @@
 import { getEvent } from "@/actions/getEvent";
 import { format } from "date-fns";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getUser, getUsers } from "@/actions/getUser";
+import { ImLocation } from "react-icons/im";
 import EventHeader from "@/components/event/event-header";
 import EventTitle from "@/components/event/event-title";
 import EventAttendees from "@/components/event/event-attendees";
-import { ImLocation } from "react-icons/im";
 import TextView from "@/components/ui/textview";
 import AddAttendee from "@/components/event/AddAttendee";
 import FlexBetween from "@/components/sections/flex-between";
 import EventComment from "@/components/event/event-comment";
 import AddComent from "@/components/event/add-comment";
 
-const revalidate = 60;
+const revalidate = 1;
 
 interface EventDetailProps {
   eventId: string;
@@ -50,7 +51,16 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
             </div>
             <div className="self-start md:self-end text-neutral-500 text-start md:text-right">
               <h3 className="text-base mb-2 font-bold">Organizer</h3>
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center">
+                <Avatar>
+                  <AvatarImage
+                    src={user.profileImageUrl}
+                    alt="Profile Image"
+                    />
+                  <AvatarFallback>
+                    {user?.firstName?.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
                 <span className="text-sm">
                   {user.firstName} {user.lastName}
                 </span>

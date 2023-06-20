@@ -1,0 +1,66 @@
+import {format} from 'date-fns'
+import Link from 'next/link';
+import Image from 'next/image';
+import { CiEdit } from 'react-icons/ci';
+import DeleteEvent from '../action-components/delete-event';
+
+interface EventProps {
+    title: string;
+    id: string;
+    time: string;
+    location: string;
+    date: string;
+    image?: string | null;
+}
+
+const Event = ({
+    title,
+    id,
+    time,
+    location,
+    date,
+    image
+}: EventProps) => {
+  return (
+    <li
+    className='bg-white shadow-sm rounded-md p-4 flex justify-between items-center'
+    >
+        <div className='flex items-center gap-4'>
+            <Image 
+            alt={title}
+            src={image || '/images/event-default.png'}
+            width={120}
+            height={120}
+            loading='lazy'
+            className='rounded-md aspect-auto w-auto h-auto' 
+            />
+            <div>
+                <h3
+                className='text-lg font-medium hover:underline'
+                >
+                    <Link href={`/events/${id}`}>
+                        {title}
+                    </Link>
+                </h3>
+                <time className='text-pink-500 text-xs lg:text-sm'>
+                    {format(new Date(date), 'MMMM d, yyyy')} at {time}
+                </time>
+                <address className='text-xs lg:text-sm'>
+                    {location}
+                </address>
+            </div>
+        </div>
+        {/* actions */}
+        <div className='flex items-center space-x-4'>
+            <DeleteEvent eventId={id} />
+            <Link 
+            className='text-green-500 hover:text-green-600'
+            href={`/events/edit/${id}`}>
+                <CiEdit size={25}/>
+            </Link>
+        </div>
+    </li>
+  )
+}
+
+export default Event

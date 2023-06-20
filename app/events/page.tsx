@@ -1,7 +1,6 @@
 import ClientOnly from "@/components/sections/client-only";
 import EmptyState from "@/components/sections/empty-state";
 import { EventParams, getEvents } from "@/actions/getEvents";
-import Categories from "@/components/sections/categories";
 import EventList from "@/components/sections/event-list";
 
 interface Props {

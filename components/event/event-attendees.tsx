@@ -37,6 +37,7 @@ const EventAttendees = ({
         ))}
       </div>
     )}
+    
     </>
   );
 };
