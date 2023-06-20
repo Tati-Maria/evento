@@ -1,14 +1,20 @@
 import prisma from "@/lib/prisma";
+import {auth} from "@clerk/nextjs";
 
-export const getUserEvents = async (userId: string) => {
+export const getUserEvents = async () => {
+  const {userId} = auth();
+
+  if (!userId) {
+    return [];
+  }
+
   const events = await prisma.event.findMany({
     where: {
-        organizerId: {
-            equals: userId
-        }
+        organizerId: userId || "",
     },
     include: {
       attendees: true,
+      comments: true
     },
   });
 
@@ -17,6 +23,13 @@ export const getUserEvents = async (userId: string) => {
     date: event.date.toISOString(),
     attendees: event.attendees.map((attendee) => ({
         ...attendee,
+        createdAt: attendee.createdAt.toISOString(),
+        updatedAt: attendee.updatedAt.toISOString(),
+    })),
+    comments: event.comments.map((comment) => ({
+        ...comment,
+        createdAt: comment.createdAt.toISOString(),
+        updatedAt: comment.updatedAt.toISOString(),
     })),
  }));
 

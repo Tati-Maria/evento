@@ -7,6 +7,7 @@ import Navbar from "@/components/nav/navbar";
 import Provider from "@/providers/provider";
 import Categories from "@/components/sections/categories";
 import Container from "@/components/sections/container";
+import Footer from "@/components/sections/footer";
 
 const inter = Outfit({
   weight: ["300", "400", "500", "700"],
@@ -53,6 +54,7 @@ export default async function RootLayout({
               </ClientOnly>
               <main className="min-h-screen">{children}</main>
             </Container>
+            <Footer />
           </Provider>
         </body>
       </html>

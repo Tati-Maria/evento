@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-export interface EventParams {
+interface EventParams {
     eventId: string;
 }
 
