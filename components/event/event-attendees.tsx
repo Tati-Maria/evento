@@ -3,41 +3,43 @@
 // - app\events\[eventId]\page.tsx
 import React from "react";
 import Image from "next/image";
+import { User } from "@clerk/nextjs/dist/types/server";
 
 type Attendees = {
-  attendees: string[];
+  attendees: (User | undefined)[];
 };
 
-const EventAttendees = () => {
+const EventAttendees = ({
+  attendees,
+}: Attendees) => {
   return (
-    <div className="avatar-group -space-x-6  py-2">
-      <div className="avatar border-transparent">
-        <div className="w-10">
-          <Image src={"/60.jpg"} alt="a person" width={50} height={50} />
-        </div>
+    <>
+    {attendees.length === 0 &&  (
+      <div className="text-start text-neutral-500 py-4">
+        <span>No attendees yet</span>
       </div>
-      <div className="avatar border-transparent">
-        <div className="w-10">
-          <Image
-            src={"/MayaJacobs.jpg"}
-            alt="a person"
-            width={50}
-            height={50}
-          />
-        </div>
+    )}
+    {attendees.length > 0 && (
+      <div className="avatar-group -space-x-6  py-2">
+        {attendees.map((attendee) => (
+          <div 
+          key={attendee?.id}
+          className="avatar border-transparent">
+            <div className="w-10">
+              <Image
+                src={attendee?.profileImageUrl || "/60.jpg"}
+                alt="a person"
+                width={50}
+                height={50}
+              />
+            </div>
+          </div>
+        ))}
       </div>
-      <div className="avatar border-transparent">
-        <div className="w-10">
-          <Image src={"/63.jpg"} alt="a person" width={50} height={50} />
-        </div>
-      </div>
-      <div className="avatar border-transparent">
-        <div className="w-10">
-          <Image src={"/smas.jpg"} alt="a person" width={50} height={50} />
-        </div>
-      </div>
-    </div>
+    )}
+    </>
   );
 };
 
 export default EventAttendees;
+

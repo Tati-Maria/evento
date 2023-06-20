@@ -1,16 +1,15 @@
 import { Metadata } from "next";
 import ClientOnly from "@/components/sections/client-only";
 import "./globals.css";
-import {
-  ClerkProvider,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Montserrat, Outfit } from "next/font/google";
 import Navbar from "@/components/nav/navbar";
 import Provider from "@/providers/provider";
 import Categories from "@/components/sections/categories";
+import Container from "@/components/sections/container";
 
 const inter = Outfit({
-  weight: ["300", "400","500", "700"],
+  weight: ["300", "400", "500", "700"],
   subsets: ["latin-ext"],
 });
 
@@ -40,34 +39,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
-    <ClerkProvider
-    appearance={{
-      variables: {
-        colorPrimary: "#6610F2",
-        colorText: "#000000",
-        colorSuccess: "#56E39F",
-        colorDanger: "#E74C3C",
-        colorWarning: "#F1C40F",
-      },
-      elements: {
-        button: {
-            backgroundColor: "#6610F2",
-        },
-      }
-    }}
-    >
+    <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} bg-white`}>
           <Provider>
-            <ClientOnly>
-              <header>
-                <Navbar />
-                <Categories />
-              </header>
-            </ClientOnly>
-            <main className="min-h-screen">{children}</main>
+            <Container>
+              <ClientOnly>
+                <header>
+                  <Navbar />
+                  <Categories />
+                </header>
+              </ClientOnly>
+              <main className="min-h-screen">{children}</main>
+            </Container>
           </Provider>
         </body>
       </html>

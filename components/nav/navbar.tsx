@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { AiOutlineLogout, AiOutlineLogin } from "react-icons/ai";
 import { Switch } from "../ui/switch";
 import { useTheme } from "next-themes";
@@ -7,7 +8,6 @@ import {
   SignedOut,
   SignInButton,
   SignOutButton,
-  SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -44,23 +44,22 @@ const Navbar = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2 font-bold text-2xl">Evento</div>
+          <div className="flex-1 px-2 mx-2 font-bold text-2xl">
+            <Link href="/">Evento</Link>
+          </div>
           <div className="flex-none  lg:hidden">
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <UserButton />
           </div>
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal space-x-10">
               {/* Navbar menu content here */}
               <MenuItem
-                className="hover:font-bold"
+                className="hover:bg-gray-100 rounded-md h-12"
                 title="Dashboard"
                 href="/dashboard"
               />
               <MenuItem title="Events" href="/events" />
               <MenuItem title="Analytics" href="/analytics" />
-              <MenuItem title="Settings" href="/settings" />
               <div className="flex items-center space-x-6">
                 <Switch
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -99,12 +98,6 @@ const Navbar = () => {
             title="Analytics"
             href="/analytics"
             icon={IoAnalyticsOutline}
-            className="hover:bg-gray-100 rounded-md h-12"
-          />
-          <MenuItem
-            title="Settings"
-            href="/settings"
-            icon={IoSettingsOutline}
             className="hover:bg-gray-100 rounded-md h-12"
           />
           <div className="hover:bg-gray-100 rounded-md h-12 p-4">

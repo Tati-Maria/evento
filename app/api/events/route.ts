@@ -5,7 +5,7 @@ import {auth} from "@clerk/nextjs"
 export async function GET() {
     const events = await prisma.event.findMany({
         orderBy: {
-            date: "desc"
+            title: 'asc'
         }
     });
 
