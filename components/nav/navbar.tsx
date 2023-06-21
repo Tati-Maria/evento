@@ -58,16 +58,11 @@ const Navbar = () => {
                 title="Dashboard"
                 href="/dashboard"
               />
-              <MenuItem title="Events" href="/events" />
-              <MenuItem title="Analytics" href="/analytics" />
-              <div className="flex items-center space-x-6">
+              <MenuItem className="hover:bg-gray-100 rounded-md h-12" title="Events" href="/events" />
+              <MenuItem className="hover:bg-gray-100 rounded-md h-12" title="Analytics" href="/analytics" />
+              <div>
                 <SignedIn>
                   <UserButton />
-                </SignedIn>
-                <SignedIn>
-                  <SignOutButton>
-                    <span className="text-red-500 cursor-pointer">Log Out</span>
-                  </SignOutButton>
                 </SignedIn>
                 <SignedOut>
                   <SignInButton />
