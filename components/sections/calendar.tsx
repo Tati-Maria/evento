@@ -27,7 +27,7 @@ const CalendarSection = ({dates}: Props) => {
 
     return (
         <section
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col justify-center items-center dark:text-gray-950"
         >
         <Calendar
         className="rounded-md"

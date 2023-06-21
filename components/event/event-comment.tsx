@@ -24,7 +24,7 @@ const EventComment = ({
 
   return (
     <div
-    className="flex flex-col space-y-4 p-4 border-b border-neutral-200 bg-[#f7f7f7]"
+    className="flex flex-col space-y-4 p-4 border-b border-neutral-200 bg-[#f7f7f7] dark:bg-slate-800 dark:border-slate-700"
     >
       <div className="flex items-center space-x-4">
         <Avatar>

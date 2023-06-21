@@ -77,9 +77,9 @@ const Dashboard = async ({
           Create an Event
         </Link>
       </article>
-      <GridContainer className="bg-neutral-100 p-2 md:grid-cols-2">
+      <GridContainer className="bg-neutral-100 p-2 md:grid-cols-2 dark:bg-slate-900">
         {/* Events */}
-        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white">
+        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white dark:bg-slate-800">
           <h3 className="text-xl font-medium mb-4">Events</h3>
           <ul className="space-y-4 h-64 overflow-y-scroll">
             {events.length === 0 && (
@@ -100,7 +100,7 @@ const Dashboard = async ({
           </ul>
         </div>
         {/* RSVPs */}
-        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white">
+        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white dark:bg-slate-800">
           <h3 className="text-xl font-medium mb-4">RSVPs</h3>
           <ul className="space-y-4 h-64 overflow-y-scroll">
             {eventsWithRsvps.length === 0 && (
@@ -135,7 +135,7 @@ const Dashboard = async ({
           </ul>
         </div>
         {/* Recent Comments */}
-        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white">
+        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white dark:bg-slate-800">
           <h3 className="text-xl font-medium mb-4">Recent Comments</h3>
           <ul className="space-y-4 h-64 overflow-y-scroll">
             {commentsOnEvents.map(event => (
@@ -174,7 +174,7 @@ const Dashboard = async ({
           </ul>
         </div>
         {/* Events you will atttend */}
-        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white">
+        <div className="col-span-2 md:col-span-1 shadow-sm rounded-md p-4 bg-white dark:bg-slate-800">
           <h3 className="text-xl font-medium mb-4">Events you will attend</h3>
           <ul className="space-y-4 h-64 overflow-y-scroll">
             {eventsAttending?.length === 0 && (

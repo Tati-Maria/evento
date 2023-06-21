@@ -38,7 +38,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import Title from "@/components/ui/title";
 import { EventForm } from "@/types";
-import { fi } from "date-fns/locale";
+
 
 const UpdateEvent = () => {
   const searchParams = useSearchParams();

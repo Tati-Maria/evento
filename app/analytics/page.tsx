@@ -27,9 +27,7 @@ const Analytics = async () => {
   return (
     <section className="flex flex-col  py-20">
       <Title title="Analytics" className="mb-2 font-bold" />
-      <TextView 
-      text="Some data are placeholders."  
-      className="mb-8" />
+      <TextView text="Some data are placeholders." className="mb-8" />
       <GridContainer>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card>
@@ -48,9 +46,9 @@ const Analytics = async () => {
             <CardContent>
               <div className="flex flex-col space-y-4">
                 {userEvents.length === 0 && (
-                    <div className="text-sm text-gray-500">
-                        You have not created any events yet.
-                    </div>
+                  <div className="text-sm text-gray-500">
+                    You have not created any events yet.
+                  </div>
                 )}
                 {userEvents.map(event => (
                   <div key={event.id} className="flex items-center">
@@ -80,8 +78,10 @@ const Analytics = async () => {
             <CardContent>
               <div className="text-2xl font-bold">{userEvents.length}</div>
               <p className="text-xs text-muted-foreground">
-                <span className="text-green-500 mr-1">+3.48%</span> since last
-                month
+                <span className="text-green-500 mr-1">
+                  +{userEvents.length / 100}
+                </span>{" "}
+                since last month
               </p>
             </CardContent>
           </Card>

@@ -9,7 +9,7 @@ import Categories from "@/components/sections/categories";
 import Container from "@/components/sections/container";
 import Footer from "@/components/sections/footer";
 
-const inter = Outfit({
+const outfit = Outfit({
   weight: ["300", "400", "500", "700"],
   subsets: ["latin-ext"],
 });
@@ -43,7 +43,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-white`}>
+        <body className={`${outfit.className} bg-white dark:bg-gray-950 dark:text-white`}>
           <Provider>
             <Container>
               <ClientOnly>

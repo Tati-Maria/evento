@@ -76,7 +76,7 @@ const AddComent = ({ eventId }: AddCommentProps) => {
                         <Textarea
                         placeholder="How was the event?" 
                         {...field}
-                        className="resize-none bg-slate-100"
+                        className="resize-none bg-slate-100 dark:bg-slate-900"
                         />
                     </FormControl>
                     <FormDescription>

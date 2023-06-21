@@ -249,7 +249,9 @@ const EventForm = () => {
                 <FormControl
                 >
                   <SelectTrigger>
-                    <SelectValue className="text-gray-950" placeholder="Select a category that matches your event" />
+                    <SelectValue 
+                    placeholder="Select a category"
+                     />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent
@@ -271,6 +273,9 @@ const EventForm = () => {
                   <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
+              <FormDescription>
+                Choose a category for your event.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

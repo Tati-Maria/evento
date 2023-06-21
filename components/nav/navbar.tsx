@@ -14,7 +14,6 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import {
   IoAnalyticsOutline,
   IoCalendarOutline,
-  IoSettingsOutline,
 } from "react-icons/io5";
 import MenuItem from "../ui/menu-item";
 
@@ -26,7 +25,7 @@ const Navbar = () => {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <div className="w-full navbar bg-base-300">
+        <div className="w-full navbar ">
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
@@ -54,13 +53,15 @@ const Navbar = () => {
             <ul className="menu menu-horizontal space-x-10">
               {/* Navbar menu content here */}
               <MenuItem
-                className="hover:bg-gray-100 rounded-md h-12"
                 title="Dashboard"
                 href="/dashboard"
               />
-              <MenuItem className="hover:bg-gray-100 rounded-md h-12" title="Events" href="/events" />
-              <MenuItem className="hover:bg-gray-100 rounded-md h-12" title="Analytics" href="/analytics" />
-              <div>
+              <MenuItem  title="Events" href="/events" />
+              <MenuItem  title="Analytics" href="/analytics" />
+              <div className="flex items-center space-x-6">
+                <Switch 
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                />
                 <SignedIn>
                   <UserButton />
                 </SignedIn>
@@ -75,16 +76,14 @@ const Navbar = () => {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-white pt-10">
+        <ul className="menu p-4 w-80 h-full bg-white pt-10 dark:bg-slate-800">
           {/* Sidebar content here */}
           <MenuItem
             title="Dashboard"
             href="/dashboard"
             icon={LuLayoutDashboard}
-            className="hover:bg-gray-100 rounded-md h-12"
           />
           <MenuItem
-            className="hover:bg-gray-100 rounded-md h-12"
             title="Events"
             href="/events"
             icon={IoCalendarOutline}
@@ -93,9 +92,8 @@ const Navbar = () => {
             title="Analytics"
             href="/analytics"
             icon={IoAnalyticsOutline}
-            className="hover:bg-gray-100 rounded-md h-12"
           />
-          <div className="hover:bg-gray-100 rounded-md h-12 p-4">
+          <div className="hover:bg-gray-100 rounded-md h-10 p-4 flex items-center dark:hover:bg-slate-900">
             <div className="flex items-center space-x-4">
               <SignedIn>
                 <span>

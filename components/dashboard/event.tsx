@@ -16,7 +16,7 @@ interface EventProps {
 
 const Event = ({ title, id, time, location, date, image, event }: EventProps) => {
   return (
-    <li className="bg-white shadow-sm rounded-md p-4 flex flex-col sm:flex-row justify-center items-center sm:justify-between">
+    <li className="bg-white dark:bg-slate-900 shadow-sm rounded-md p-4 flex flex-col sm:flex-row justify-center items-center sm:justify-between">
       <div className="flex items-center gap-4 flex-col text-center sm:text-start sm:flex-row">
         <Image
           alt={title}
