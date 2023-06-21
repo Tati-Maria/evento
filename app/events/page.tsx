@@ -20,7 +20,7 @@ const EventsPage = async ({ searchParams }: Props) => {
   if (events?.length === 0) {
     return (
       <ClientOnly>
-        <EmptyState showReset />
+        <EmptyState showReset/>
       </ClientOnly>
     );
   }

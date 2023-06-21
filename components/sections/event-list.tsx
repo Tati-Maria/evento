@@ -1,5 +1,4 @@
 import { SafeEvent } from "@/types"
-import CalendarSection from "./calendar";
 import {format} from "date-fns"
 import EventCard from "@/components/event/event-card";
 
@@ -11,11 +10,6 @@ const EventList: React.FC<Props> = ({
     events
 }) => {
     
-
-    // event dates
-    const eventDates = events?.map((event) => {
-        return new Date(event.date)
-    })
 
   return (
     <div 
@@ -34,8 +28,6 @@ const EventList: React.FC<Props> = ({
                 date={format(new Date(event.date), "MMMM dd, yyyy")}
                 time={event.time}
                 location={event.location}
-                category={event.category}
-                attendees={event.attendees}
                 />
             ))}
         </div>

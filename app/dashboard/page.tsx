@@ -25,6 +25,7 @@ type Props = {
 const Dashboard = async ({
   searchParams,
 }: Props) => {
+  
   const events = await getUserEvents();
   const users = await getUsers();
   const { userId } = auth();
@@ -93,6 +94,7 @@ const Dashboard = async ({
                 date={event.date}
                 time={event.time}
                 image={event.image}
+                event={event}
               />
             ))}
           </ul>

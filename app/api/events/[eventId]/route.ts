@@ -6,16 +6,10 @@ interface EventParams {
   eventId: string;
 }
 
-export async function GET({
-  params,
-}: {
-  params: {
-    eventId: string;
-  };
-}) {
-  const { eventId } = params;
+export async function GET(request: Request, {params}: {params: {eventId: string}}) {
+  const id = params.eventId;
 
-  if (!eventId || typeof eventId !== "string") {
+  if (!id || typeof id !== "string") {
     return NextResponse.json(
       {
         error: "Invalid event ID",
@@ -28,8 +22,8 @@ export async function GET({
 
   const event = await prisma.event.findUnique({
     where: {
-      id: eventId,
-    },
+      id,
+    }
   });
 
   if (!event) {
@@ -46,11 +40,9 @@ export async function GET({
   return NextResponse.json(event);
 }
 
-export async function PATCH(
-  request: Request,
-  { params }: { params: EventParams }
-) {
+export async function PATCH(request: Request, {params}: {params: {eventId: string}}) {
   const { userId } = auth();
+  const id = params.eventId;
   const json = await request.json();
 
   if (!userId) {
@@ -67,7 +59,7 @@ export async function PATCH(
   try {
     const updatedEvent = await prisma.event.update({
       where: {
-        id: params.eventId,
+        id,
       },
       data: {
         ...json,
@@ -86,7 +78,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: EventParams }
+  { params }: { params: { eventId: string }}
 ) {
   const { eventId } = params;
 

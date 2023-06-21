@@ -37,7 +37,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 
-const eventSchema = z.object({
+export const eventSchema = z.object({
   title: z
     .string({
       required_error: "Title is required.",

@@ -3,17 +3,29 @@ import { Event, Attendee } from "@prisma/client";
 export type SafeEvent = Omit<Event, "createdAt" | "updatedAt"> & {
     createdAt: string;
     updatedAt: string;
-    image: string | null;
-    date: Date;
-    attendees: SafeAttendee[];
+    
 }
 
 export type SafeAttendee = Omit<Attendee, "createdAt" | "updatedAt"> & {
     createdAt: string;
     updatedAt: string;
-    event: SafeEvent;
+}
+
+export type SafeComment = Omit<Comment, "createdAt" | "updatedAt"> & {
+    createdAt: string;
+    updatedAt: string;
+}
+
+export type EventForm = {
     id: string;
-    userId: string;
-    eventId: string;
-    rsvpStatus: string;
+    title: string;
+    description: string;
+    location: string;
+    date: Date;
+    time: string;
+    image: string | null;
+    organizerId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    category: string;
 }

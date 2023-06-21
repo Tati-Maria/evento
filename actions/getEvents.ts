@@ -50,7 +50,7 @@ export async function getEvents(params: EventParams) {
         const events = await prisma.event.findMany({
             where: query,
             orderBy: {
-                date: 'desc'
+                date: 'asc'
             },
             include: {
                 attendees: true,

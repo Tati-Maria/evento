@@ -13,8 +13,6 @@ interface EventCardProps {
   date: string;
   time: string;
   location: string;
-  category: string;
-  attendees: SafeAttendee[];
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -24,11 +22,22 @@ const EventCard: React.FC<EventCardProps> = ({
   date,
   time,
   location,
-  category,
-  attendees,
 }) => {
+
+  /* To show if an event has passed or not
+  I added additionl styles to the event card if it has passed
+   */
+  const today = new Date();
+  const eventDate = new Date(date);
+  const isToday = today.toDateString() === eventDate.toDateString();
+  const isPast = today > eventDate;
+
   return (
-    <article className="border border-gray-200 rounded-md overflow-hidden hover:shadow transition-shadow">
+    <article 
+    className={`
+    border border-gray-200 rounded-md overflow-hidden hover:shadow transition-shadow ${isPast ? "opacity-50 hover:shadow-none pointer-events-none" : ""}
+    `}
+    >
       <Link className="block space-y-4 group overflow-hidden" href={`/events/${id}`}>
         <figure className="relative h-48 bg-center bg-cover">
           <Image
@@ -48,20 +57,12 @@ const EventCard: React.FC<EventCardProps> = ({
           <div className="space-y-2 text-xs">
             <span className="flex font-light">
               <FaRegClock className=" mr-2" size={15} />
-              {format(new Date(date), "MMMM dd, yyyy")} | {time}
+              {isToday ? "Today" : isPast ? "Passed" : format(new Date(date), "MMMM dd, yyyy")} at {time}
             </span>
             <span className="flex">
               <IoLocationSharp className="mr-2 text-orange-500" size={15} />
               {location}
             </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              {/* Add attendees avatars */}
-            </div>
-            <div className="p-2 bg-blue-500 rounded hover:bg-blue-600 transition duration-300 ease-in-out">
-              <FaShareAlt size={10} className=" text-white" />
-            </div>
           </div>
         </div>
       </Link>

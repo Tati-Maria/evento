@@ -55,7 +55,7 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
 
   return (
     <>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6  py-10">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6  py-10 mb-10">
         <div className="flex justify-center items-center">
           <EventHeader image={event.image} />
         </div>
