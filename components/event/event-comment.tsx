@@ -43,11 +43,8 @@ const EventComment = ({
       </div>
       <TextView text={text} className="text-gray-800" />
       {userId === authUserId && (
-        <div 
-        className="w-full space-x-4 flex items-center justify-end"
-        >
+        <div className="flex justify-end">
           <DeleteComment commentId={commentId} />
-          <span>Edit</span>
         </div>
       )}
     </div>

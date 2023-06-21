@@ -69,7 +69,9 @@ const AddComent = ({ eventId }: AddCommentProps) => {
             name="text"
             render={({ field }) => (
                 <FormItem>
-                    <FormLabel className="text-sm sm:text-base md:text-lg">Comment</FormLabel>
+                    <FormLabel className="text-sm sm:text-base md:text-lg">
+                      What did you think of the event? 
+                    </FormLabel>
                     <FormControl>
                         <Textarea
                         placeholder="How was the event?" 
@@ -87,7 +89,11 @@ const AddComent = ({ eventId }: AddCommentProps) => {
             <div className="flex justify-end">
                 <Button 
                 disabled={form.formState.isSubmitting}
-                type="submit">Add Comment</Button>
+                type="submit">
+                  {form.formState.isSubmitting ? (
+                    <span className="loading loading-spinner loading-sm"></span>
+                  ): "Add Comment"}
+                </Button>
             </div>
         </form>
     </Form>

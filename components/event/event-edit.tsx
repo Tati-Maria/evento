@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { CiEdit } from "react-icons/ci";
 
 type Props = {
     event: any;
@@ -18,7 +19,7 @@ const EditEvent: React.FC<Props> = ({event}) => {
   variant="ghost"
   onClick={() => handleEdit(event)}
   >
-    Edit
+    <CiEdit className="text-green-500 hover:text-green-600" size={25} />
 </Button>
 );
 };

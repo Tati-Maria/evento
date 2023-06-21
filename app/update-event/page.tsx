@@ -77,8 +77,8 @@ const UpdateEvent = () => {
       try {
         await axios.patch(`/api/events/${eventId}`, values);
         toast.success("Event updated successfully");
-        form.reset();
         router.push(`/events/${eventId}`);
+        form.reset();
       } catch (error: any) {
         toast.error(error.message);
       }
@@ -95,7 +95,6 @@ const UpdateEvent = () => {
         onSubmit={form.handleSubmit(updateEvent)}>
           <FormField
             control={form.control}
-            rules={{ required: "Title is required." , minLength: 3, maxLength: 50}}
             name="title"
             render={({ field }) => (
               <FormItem>
@@ -113,7 +112,6 @@ const UpdateEvent = () => {
           <FormField
             control={form.control}
             name="description"
-            rules={{ required: "Description is required." }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Description</FormLabel>
@@ -129,8 +127,7 @@ const UpdateEvent = () => {
           />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <FormField
-            rules={{ required: "Location is required." }}
-              control={form.control}
+            control={form.control}
               name="location"
               render={({ field }) => (
                 <FormItem>
@@ -145,7 +142,6 @@ const UpdateEvent = () => {
             <FormField
               control={form.control}
               name="time"
-              rules={{ required: "Time is required." }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Time</FormLabel>
@@ -158,7 +154,6 @@ const UpdateEvent = () => {
             />
             <FormField
               control={form.control}
-              rules={{ required: "Category is required." }}
               name="category"
               render={({ field }) => (
                 <FormItem>
@@ -193,9 +188,6 @@ const UpdateEvent = () => {
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormDescription>
-                    Select the category that best fits your event.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -238,9 +230,6 @@ const UpdateEvent = () => {
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription>
-                    Select a date that your event will take place.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

@@ -2,7 +2,6 @@ import { format } from "date-fns";
 import EditEvent from "../event/event-edit";
 import Link from "next/link";
 import Image from "next/image";
-import { CiEdit } from "react-icons/ci";
 import DeleteEvent from "../action-components/delete-event";
 
 interface EventProps {

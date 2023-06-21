@@ -34,15 +34,20 @@ export default function AddAttendee({ eventId }: AddAttendeeProps) {
   const router = useRouter();
 
   const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
+        if (!data || !eventId) return;
     try {
-      await axios.post(`/api/events/${eventId}/attendee`, data);
-      toast.success("You have successfully registered for this event.", {
-        icon: "🎉",
+      //if it's the first time send post request else send put request
+      const response = await axios.post(`/api/events/${eventId}/attendee`, data);
+      toast.success("Your RSVP has been added", {
+        icon: "👏",
       });
       router.refresh();
       form.reset();
+
+      
+
     } catch (error: any) {
-      toast.error("You are already registered for this event.");
+      toast.error(error.response.data.message);
     }
   } , [eventId, router, form]);
 
@@ -90,7 +95,9 @@ export default function AddAttendee({ eventId }: AddAttendeeProps) {
           className="btn-special"
           type="submit"
         >
-          Submit
+          {form.formState.isSubmitting ? (
+            <span className="loading loading-spinner loading-sm"></span>
+          ) : "Submit"}
         </Button>
       </form>
     </Form>

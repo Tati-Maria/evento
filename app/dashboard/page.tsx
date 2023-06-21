@@ -187,7 +187,7 @@ const Dashboard = async ({
               className="flex justify-between items-center border-b pb-2"
               key={event.id}>
                 <Link href={`/events/${event.id}`}>
-                  <h4>
+                  <h4 className="text-sm">
                     {event.title} - {format(new Date(event.date), "MM/dd/yyyy")}{" "}
                     - {event.time}
                   </h4>

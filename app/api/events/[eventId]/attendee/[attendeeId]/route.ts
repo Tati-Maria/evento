@@ -15,18 +15,21 @@ export async function PATCH(request: Request, {params}: {params: {eventId: strin
     }
 
     try {
-        const updateAttendee = await prisma.attendee.update({
+        const updateAttendee = await prisma.attendee.upsert({
             where: {
                 id: params.attendeeId,
             },
-            data: {
+            update: {
+                ...json,
+            },
+            create: {
                 ...json,
                 event: {
                     connect: {
                         id: params.eventId,
                     }
                 },
-                userId,
+                userId
             }
         });
 

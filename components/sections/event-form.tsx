@@ -36,6 +36,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 export const eventSchema = z.object({
   title: z
@@ -77,12 +78,14 @@ export const eventSchema = z.object({
     }),
   image: z.string().url().optional(),
   time: z.string().min(3).max(50),
-  category: z.string().min(3).max(50),
+  category: z.string(),
 });
 
 type EventValues = z.infer<typeof eventSchema>;
 
 const EventForm = () => {
+
+  const router = useRouter()
   const form = useForm<EventValues>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
@@ -102,13 +105,14 @@ const EventForm = () => {
         if (response.status === 201) {
             toast.success("Event created successfully!");
             form.reset();
+            router.push("/events");
         } else {
             toast.error("Something went wrong.");
         }
     } catch (error: any) {
         console.log(error.response.data.message)
     }
- }, [form]);
+ }, [form, router]);
 
   return (
     <Form {...form}>
@@ -290,7 +294,9 @@ const EventForm = () => {
           type="submit"
             disabled={form.formState.isSubmitting}
           >
-            Submit
+            {form.formState.isSubmitting ? (
+              <span className="loading loading-spinner loading-sm"></span>
+            ) : "Create Event"}
           </Button>
         </div>
       </form>
