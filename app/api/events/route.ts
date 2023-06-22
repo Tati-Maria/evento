@@ -15,6 +15,12 @@ export async function GET() {
 export async function POST(request: Request) {
     const json = await request.json();
     const {userId} = auth();
+
+    if(!userId) {
+        return new Response("Unauthorized", {
+            status: 401
+        })
+    }
     
     const event = await prisma.event.create({
         data: {

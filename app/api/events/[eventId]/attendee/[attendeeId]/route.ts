@@ -6,13 +6,7 @@ export async function PATCH(request: Request, {params}: {params: {eventId: strin
     const {userId} = auth();
     const json = await request.json();
 
-    if (!userId) {
-        return NextResponse.json({
-            error: "You must be logged in to update an attendee.",
-        }, {
-            status: 401,
-        });
-    }
+    if (!userId) return NextResponse.redirect("/sign-in");
 
     try {
         const updateAttendee = await prisma.attendee.upsert({
@@ -47,13 +41,7 @@ export async function PATCH(request: Request, {params}: {params: {eventId: strin
 export async function DELETE(request: Request, {params}: {params: {eventId: string, attendeeId: string}}) {
     const {userId} = auth();
 
-    if (!userId) {
-        return NextResponse.json({
-            error: "You must be logged in to delete an attendee.",
-        }, {
-            status: 401,
-        });
-    }
+    if (!userId) return NextResponse.redirect("/sign-in");
 
     try {
         const deleteAttendee = await prisma.attendee.delete({

@@ -1,4 +1,5 @@
 import {authMiddleware} from "@clerk/nextjs/server";
+import { redirectToSignIn } from "@clerk/nextjs";
 
 // set the paths that dont require authentication
 const publicPaths = [
@@ -6,7 +7,7 @@ const publicPaths = [
     "/sign-in",
     "/sign-up",
     "/events",
-    "/events/:id",
+    "/events/:path*",
     "/about"
 ];
 

@@ -14,7 +14,7 @@ const Provider = ({children}: {children: React.ReactNode}) => {
       toastOptions={{
         style: {
           color: "#fff",
-          background: "rgb(168 85 247)",
+          background: "#333",
         },
       }}
     />

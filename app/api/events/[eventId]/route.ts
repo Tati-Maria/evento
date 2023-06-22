@@ -2,9 +2,6 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 
-interface EventParams {
-  eventId: string;
-}
 
 export async function GET(request: Request, {params}: {params: {eventId: string}}) {
   const id = params.eventId;
@@ -45,16 +42,7 @@ export async function PATCH(request: Request, {params}: {params: {eventId: strin
   const id = params.eventId;
   const json = await request.json();
 
-  if (!userId) {
-    return NextResponse.json(
-      {
-        error: "You must be logged in to update an event",
-      },
-      {
-        status: 401,
-      }
-    );
-  }
+  if (!userId) return NextResponse.redirect("/sign-in");
 
   try {
     const updatedEvent = await prisma.event.update({
@@ -84,16 +72,7 @@ export async function DELETE(
 
   const { userId } = auth();
 
-  if (!userId) {
-    return NextResponse.json(
-      {
-        error: "You must be logged in to delete an event",
-      },
-      {
-        status: 401,
-      }
-    );
-  }
+  if (!userId) return NextResponse.redirect("/sign-in");
 
   if (!eventId || typeof eventId !== "string") {
     return NextResponse.json(

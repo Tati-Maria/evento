@@ -1,11 +1,11 @@
 "use client";
 import { IoIosPeople} from "react-icons/io";
-import {IoShareSocial} from "react-icons/io5";
+import {IoShareSocial, IoPeopleCircleSharp} from "react-icons/io5";
 import {LuVenetianMask} from "react-icons/lu";
 import CategoryCard from "../ui/category-card";
 import {MdOutlineSportsBasketball} from "react-icons/md";
+import {BsMic} from "react-icons/bs";
 import {BiParty, BiSushi} from "react-icons/bi";
-import {GrWorkshop, GrMicrophone} from "react-icons/gr";
 import {FaLaptopCode, FaGamepad, FaSuitcaseRolling} from "react-icons/fa";
 import {FcClapperboard, FcConferenceCall, FcMusic} from "react-icons/fc";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -29,7 +29,7 @@ export const categories = [
     },
     {
         title: "Workshop",
-        icon: GrWorkshop
+        icon: IoPeopleCircleSharp
     },
     {
         title: "Hackathon",
@@ -57,7 +57,7 @@ export const categories = [
     },
     {
         title: "Seminar",
-        icon: GrMicrophone
+        icon: BsMic
     },
     {
         title: "Festival",

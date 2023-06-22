@@ -33,34 +33,49 @@ export default function AddAttendee({ eventId }: AddAttendeeProps) {
   });
   const router = useRouter();
 
-  const onSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
-        if (!data || !eventId) return;
-    try {
-      //if it's the first time send post request else send put request
-      const response = await axios.post(`/api/events/${eventId}/attendee`, data);
-      toast.success("Your RSVP has been added", {
-        icon: "👏",
-      });
-      router.refresh();
-      form.reset();
-
-      
-
-    } catch (error: any) {
-      toast.error(error.response.data.message);
-    }
-  } , [eventId, router, form]);
-
+  const onSubmit = useCallback(
+    async (data: z.infer<typeof FormSchema>) => {
+      if (!data || !eventId) return;
+      try {
+        //if it's the first time send post request else send put request
+        const response = await axios.post(
+          `/api/events/${eventId}/attendee`,
+          data
+        );
+        toast.success("Your RSVP has been added", {
+          icon: "👏",
+        });
+        router.refresh();
+        form.reset();
+      } catch (error: any) {
+        if (error.response.status === 409) {
+          toast.error("You have already RSVP'd to this event", {
+            icon: "😢",
+          });
+        } else {
+          toast.error("Something went wrong", {
+            icon: "😢",
+          });
+        }
+      }
+    },
+    [eventId, router, form]
+  );
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 md:w-full ">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-2/3 space-y-6 md:w-full "
+      >
         <FormField
           control={form.control}
           name="rsvpStatus"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel className="text-lg">Would you like to attend this event?</FormLabel>
+              <FormLabel className="text-lg">
+                Would you like to attend this event?
+              </FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -87,17 +102,21 @@ export default function AddAttendee({ eventId }: AddAttendeeProps) {
                   </FormItem>
                 </RadioGroup>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
+
         <Button
           disabled={form.formState.isSubmitting}
           className="btn-special"
           type="submit"
         >
           {form.formState.isSubmitting ? (
-            <span className="loading loading-spinner loading-sm"></span>
-          ) : "Submit"}
+            <span className="loading loading-spinner loading-sm text-white"></span>
+          ) : (
+            "Submit"
+          )}
         </Button>
       </form>
     </Form>

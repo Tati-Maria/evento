@@ -47,6 +47,9 @@ const Navbar = () => {
             <Link href="/">Evento</Link>
           </div>
           <div className="flex-none  lg:hidden">
+            <Switch
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            />
             <UserButton />
           </div>
           <div className="flex-none hidden lg:block">

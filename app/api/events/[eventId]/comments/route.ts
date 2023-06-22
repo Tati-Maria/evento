@@ -3,14 +3,11 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 
 
-
 export async function POST(request: Request, {params}: {params: {eventId: string}}) {
     const {userId} = auth();
     const json = await request.json();
 
-    if (!userId) {
-        return NextResponse.error()
-    }
+    if (!userId) return NextResponse.redirect("/sign-in");
 
     const comment = await prisma.comment.create({
         data: {

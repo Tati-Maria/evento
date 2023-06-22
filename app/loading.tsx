@@ -14,6 +14,7 @@ const Loading = () => {
         border-t-2
         border-b-2
         border-gray-900
+        dark:border-gray-50
         '>
         </div>
       </div>

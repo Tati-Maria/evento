@@ -11,6 +11,7 @@ import AddAttendee from "@/components/event/AddAttendee";
 import FlexBetween from "@/components/sections/flex-between";
 import EventComment from "@/components/event/event-comment";
 import AddComent from "@/components/event/add-comment";
+import { SignedIn } from "@clerk/nextjs";
 
 export const revalidate = 1;
 
@@ -18,25 +19,29 @@ interface EventDetailProps {
   eventId: string;
 }
 
-export async function generateMetadata({ params }: { params: EventDetailProps }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: EventDetailProps;
+}) {
   try {
     const event = await getEvent(params);
-    if(!event) return {
-      title: "Event not found",
-      description: "Event not found"
-    }
+    if (!event)
+      return {
+        title: "Event not found",
+        description: "Event not found",
+      };
     return {
       title: `${event.title} | Event Detail`,
       description: event.description,
-    }
+    };
   } catch (error) {
     return {
       title: "Event not found",
-      description: "Event not found"
-    }
+      description: "Event not found",
+    };
   }
 }
-
 
 const EventDetail = async ({ params }: { params: EventDetailProps }) => {
   const event = await getEvent(params);
@@ -44,9 +49,11 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
   const users = await getUsers();
 
   // Get the user for each attendee that said rsvp yes
-  const userAttendees = event.attendees.filter(attendee => attendee.rsvpStatus === "GOING").map(attendee => {
-    return users.find(user => user.id === attendee.userId);
-  })
+  const userAttendees = event.attendees
+    .filter(attendee => attendee.rsvpStatus === "GOING")
+    .map(attendee => {
+      return users.find(user => user.id === attendee.userId);
+    });
 
   // Get the user for each comment
   const userComments = event.comments.map(comment => {
@@ -73,13 +80,8 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
               <h3 className="text-base mb-2 font-bold">Organizer</h3>
               <div className="flex flex-col items-center">
                 <Avatar>
-                  <AvatarImage
-                    src={user.profileImageUrl}
-                    alt="Profile Image"
-                    />
-                  <AvatarFallback>
-                    {user?.firstName?.charAt(0)}
-                  </AvatarFallback>
+                  <AvatarImage src={user.profileImageUrl} alt="Profile Image" />
+                  <AvatarFallback>{user?.firstName?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <span className="text-sm">
                   {user.firstName} {user.lastName}
@@ -90,10 +92,14 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
         </div>
       </section>
       <section className="py-5 space-y-4">
+        <SignedIn>
         <AddAttendee eventId={event.id} />
+        </SignedIn>
         {/* Comments */}
         <div className="">
-        <AddComent eventId={event.id} />
+          <SignedIn>
+            <AddComent eventId={event.id} />
+          </SignedIn>
           <FlexBetween>
             <h3>Comments</h3>
             <span>
@@ -114,7 +120,10 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
                   text={comment.text}
                   userId={comment.userId}
                   commentId={comment.id}
-                  createdAt={format(new Date(comment.createdAt), "MMMM dd, yyyy")}
+                  createdAt={format(
+                    new Date(comment.createdAt),
+                    "MMMM dd, yyyy"
+                  )}
                   userName={
                     comment.userId === user.id
                       ? "You"

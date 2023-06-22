@@ -2,15 +2,37 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 
+export async function PUT(request: Request, {params}: {params: {eventId: string, commentId: string}}) {
+    const {userId} = auth();
+    const json = await request.json();
+
+    if (!userId) return NextResponse.redirect("/sign-in");
+
+    const comment = await prisma.comment.update({
+        where: {
+            id: params.commentId,
+        },
+        data: {
+            ...json,
+            event: {
+                connect: {
+                    id: params.eventId,
+                }
+            },
+            userId,
+        }
+    });
+
+    return NextResponse.json(comment)
+}
+
 export async function PATCH(request: Request, {params}: {params: {eventId: string, commentId: string}}) {
     const {userId} = auth();
     const json = await request.json();
 
     if (!userId) {
-        return NextResponse.json({
-            error: "You must be logged in to update a comment.",
-        }, {
-            status: 401,
+        return new Response("Unauthorized", {
+            status: 401
         });
     }
 
@@ -40,10 +62,8 @@ export async function DELETE(request: Request, {params}: {params: {eventId: stri
     const {userId} = auth();
 
     if (!userId) {
-        return NextResponse.json({
-            error: "You must be logged in to delete a comment.",
-        }, {
-            status: 401,
+        return new Response("Unauthorized", {
+            status: 401
         });
     }
 

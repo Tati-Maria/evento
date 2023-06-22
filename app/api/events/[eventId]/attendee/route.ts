@@ -9,35 +9,20 @@ export async function POST(
   const { userId } = auth();
   const json = await request.json();
 
-  if (!userId) {
-    return NextResponse.json(
-      {
-        error: "You must be logged in to register for an event.",
-      },
-      {
-        status: 401,
-      }
-    );
-  }
+  if (!userId) return NextResponse.redirect("/sign-in");
 
-  const event = await prisma.event.findUnique({
+  // check if the user is already attending the event
+  const existingAttendee = await prisma.attendee.findFirst({
     where: {
-      id: params.eventId,
+      userId,
+      eventId: params.eventId,
     },
-    select: {
-      attendees: true,
-    }
   });
 
-  if (event?.attendees?.some((attendee) => attendee.userId === userId)) {
-    return NextResponse.json(
-      {
-        message: "You are already registered for this event.",
-      },
-      {
-        status: 400,
-      }
-    );
+  if (existingAttendee) {
+    return new Response("Already attending", {
+      status: 400,
+    });
   }
 
 
