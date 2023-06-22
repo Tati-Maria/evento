@@ -48,6 +48,7 @@ const Navbar = () => {
           </div>
           <div className="flex-none  lg:hidden">
             <Switch
+            className="mr-4"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             />
             <UserButton />

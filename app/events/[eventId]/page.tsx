@@ -32,7 +32,7 @@ export async function generateMetadata({
         description: "Event not found",
       };
     return {
-      title: `${event.title} | Event Detail`,
+      title: `${event.title}`,
       description: event.description,
     };
   } catch (error) {
@@ -68,7 +68,7 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
         </div>
         <div>
           <EventTitle title={event.title} date={event.date} time={event.time} />
-          {/* **TODO** */}
+          {/* **Event** */}
           <EventAttendees attendees={userAttendees} />
           <div className="flex flex-col space-y-4">
             <TextView text={event.description} />
@@ -77,7 +77,7 @@ const EventDetail = async ({ params }: { params: EventDetailProps }) => {
               <span>{event.location}</span>
             </div>
             <div className="self-start md:self-end text-neutral-500 text-start md:text-right">
-              <h3 className="text-base mb-2 font-bold">Organizer</h3>
+              <h3 className="text-base mb-2 font-semibold">Organizer</h3>
               <div className="flex flex-col items-center">
                 <Avatar>
                   <AvatarImage src={user.profileImageUrl} alt="Profile Image" />

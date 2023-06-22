@@ -8,7 +8,8 @@ const publicPaths = [
     "/sign-up",
     "/events",
     "/events/:path*",
-    "/about"
+    "/about",
+    "/not-found",
 ];
 
 
