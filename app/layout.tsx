@@ -41,7 +41,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+    publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    signInUrl="/sign-in"
+    signUpUrl="/sign-up"
+    appearance={{
+      variables: {
+        colorPrimary: "#EE766D"
+      }
+    }}
+    >
       <html lang="en">
         <body className={`${outfit.className} bg-white dark:bg-gray-950 dark:text-white`}>
           <Provider>
