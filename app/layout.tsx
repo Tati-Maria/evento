@@ -47,7 +47,7 @@ export default async function RootLayout({
     signUpUrl="/sign-up"
     appearance={{
       variables: {
-        colorPrimary: "#EE766D"
+        colorPrimary: "rgb(236 72 153)"
       }
     }}
     >
